@@ -40,7 +40,7 @@ void loop() {
   digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
   
   goal = analogRead(A0);
-  dK = analogRead(A1)/6; // 0-171
+  dK = analogRead(A1); // 0-1023
   iK = analogRead(A2)/6; // 0-171
   pK = analogRead(A3)/6; // 0-171
   pos = analogRead(A4);
@@ -64,7 +64,7 @@ void loop() {
   prevP = p;
 
 //Putting it together
-  out =  ((p/6) * pK )/100 + ((i/6) * iK)/100 + ((d/6) * dK)/100; //each component has a max value of 292 
+  out =  ((p/6) * pK )/100 + ((i/6) * iK)/100 + ((d) * dK)/100; //each component has a max value of 292 
 
   //out value limiter
     if (out > 255) {
@@ -104,7 +104,7 @@ void loop() {
     Serial.print(", iOut: ");
     Serial.print((i/6)*iK);
     Serial.print(", dOut: ");
-    Serial.print((d/6)*dK);
+    Serial.print((d)*dK);
     Serial.print(", p: ");
     Serial.print(p);
     Serial.print(", i: ");
