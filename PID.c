@@ -64,11 +64,18 @@ void loop() {
   prevP = p;
 
 //Putting it together
-  out = ((p/6)*pK + (i/6)*iK + (d/6)*dK)/100; 
-  
+  out = (((p/6)*pK)/100 + ((i/6)*iK)/100 + ((d/6)*dK)/100; //each component has a max value of 292 
+
+  //out value limiter
+    if (out > 255) {
+    out = 255;
+  }
+  if (out < -255) {
+    out = -255;
+  }
   //2 wire motor controller - my janky solution
   if (out < 0) {
-    analogWrite(10, out);
+    analogWrite(10, out*(-1));
     analogWrite(9, 0);
   }
   else {
@@ -92,6 +99,12 @@ void loop() {
     Serial.print(pos);
     Serial.print(", out: ");
     Serial.print(out);
+    Serial.print(", pOut: ");
+    Serial.print((p/6)*pK);
+    Serial.print(", iOut: ");
+    Serial.print((i/6)*iK);
+    Serial.print(", dOut: ");
+    Serial.print((d/6)*dK);
     Serial.print(", p: ");
     Serial.print(p);
     Serial.print(", i: ");
