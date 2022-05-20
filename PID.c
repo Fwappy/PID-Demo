@@ -60,11 +60,11 @@ void loop() {
   }
   
 //dirivative
-  d = prevP - p; // theoretical max = 1023
+  d = p - prevP; // theoretical max = 1023
   prevP = p;
 
 //Putting it together
-  out =  ((p/6) * pK )/100 + ((i/6) * iK)/100 + ((d) * dK)/100; //each component has a max value of 292 
+  out =  ((p/6) * pK )/100 + ((i/6) * iK)/100 + ((d) * dK)/50; //each component has a max value of 292 
 
   //out value limiter
     if (out > 255) {
