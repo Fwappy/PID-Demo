@@ -63,7 +63,7 @@ void loop() {
   prevP = p;
 
 //Putting it together
-  out = (p*pK/100 + (i*iK)/100 + d*dK/100)/10;
+  out = (p*pK + (i*iK)/100 + d*dK)/10;
 
   //2 wire motor controller - my janky solution
   if (out < 0) {
