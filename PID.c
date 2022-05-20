@@ -60,7 +60,7 @@ void loop() {
   }
   
 //dirivative
-  d = p - prevP; // theoretical max = 1023
+  d = prevP - p; // theoretical max = 1023
   prevP = p;
 
 //Putting it together
