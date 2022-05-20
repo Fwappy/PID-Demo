@@ -64,7 +64,7 @@ void loop() {
   prevP = p;
 
 //Putting it together
-  out = (((p/6)*pK)/100 + ((i/6)*iK)/100 + ((d/6)*dK)/100; //each component has a max value of 292 
+  out =  ((p/6) * pK )/100 + ((i/6) * iK)/100 + ((d/6) * dK)/100; //each component has a max value of 292 
 
   //out value limiter
     if (out > 255) {
