@@ -1,6 +1,6 @@
 //constants
 const bool debug = 1;
-const int iLim = 1000;
+const int iLim = 1023;
 //inputs
 bool toggle;
 int goal;
@@ -40,16 +40,17 @@ void loop() {
   digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
   
   goal = analogRead(A0);
-  dK = analogRead(A1)/10;
-  iK = analogRead(A2)/10;
-  pK = analogRead(A3)/10;
+  dK = analogRead(A1)/6; // 0-171
+  iK = analogRead(A2)/6; // 0-171
+  pK = analogRead(A3)/6; // 0-171
   pos = analogRead(A4);
 
 //proportional
-  p = goal - pos;
+  p = (goal - pos); // up to 1023
 
-//integral -- fix: limit max value
-  i = i + p;
+//integral
+  i = i + p; // up to 1023
+
   //Integral windup limiter
   if (i > iLim) {
     i = iLim;
@@ -59,12 +60,12 @@ void loop() {
   }
   
 //dirivative
-  d = p - prevP;
+  d = p - prevP; // theoretical max = 1023
   prevP = p;
 
 //Putting it together
-  out = (p*pK + (i*iK)/100 + d*dK)/10;
-
+  out = ((p/6)*pK + (i/6)*iK + (d/6)*dK)/100; 
+  
   //2 wire motor controller - my janky solution
   if (out < 0) {
     analogWrite(10, out);
