@@ -39,11 +39,11 @@ void setup() {
 void loop() {
   digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
   
-  goal = analogRead(A0);
-  dK = analogRead(A1); // 0-1023
+  pos = analogRead(A0);
+  pK = analogRead(A1); // 0-1023
   iK = analogRead(A2)/6; // 0-171
-  pK = analogRead(A3)/6; // 0-171
-  pos = analogRead(A4);
+  dK = analogRead(A3)/6; // 0-171
+  goal = analogRead(A4);
 
 //proportional
   p = (goal - pos); // up to 1023
